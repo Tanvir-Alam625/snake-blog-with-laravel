@@ -17,19 +17,19 @@ License: You must have a valid license purchased only from above link or https:/
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
 	<!-- core:css -->
-	<link rel="stylesheet" href="../assets/vendors/core/core.css">
+	<link rel="stylesheet" href="{{asset('assets')}}/vendors/core/core.css">
 	<!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 	<!-- end plugin css for this page -->
 	<!-- inject:css -->
-	<link rel="stylesheet" href="../assets/fonts/feather-font/css/iconfont.css">
-	<link rel="stylesheet" href="../assets/vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="{{asset('assets')}}/fonts/feather-font/css/iconfont.css">
+	<link rel="stylesheet" href="{{asset('assets')}}/vendors/flag-icon-css/css/flag-icon.min.css">
 	<!-- endinject -->
   <!-- Layout styles -->  
-	<link rel="stylesheet" href="../assets/css/demo_1/style.css">
+	<link rel="stylesheet" href="{{asset('assets')}}/css/demo_1/style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="../assets/images/favicon.png" />
+  <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -67,6 +67,9 @@ License: You must have a valid license purchased only from above link or https:/
                 <li class="nav-item">
                   <a href="{{ route('user.create')}}" class="nav-link">Create User</a>
                 </li>
+                <li class="nav-item">
+                  <a href="{{ route('profile.info')}}" class="nav-link">Profile</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -97,11 +100,11 @@ License: You must have a valid license purchased only from above link or https:/
         <div class="theme-wrapper">
           <h6 class="text-muted mb-2">Light Theme:</h6>
           <a class="theme-item active" href="../demo_1/dashboard-one.html">
-            <img src="../assets/images/screenshots/light.jpg" alt="light theme">
+            <img src="{{asset('assets')}}/images/screenshots/light.jpg" alt="light theme">
           </a>
           <h6 class="text-muted mb-2">Dark Theme:</h6>
           <a class="theme-item" href="../demo_2/dashboard-one.html">
-            <img src="../assets/images/screenshots/dark.jpg" alt="light theme">
+            <img src="{{asset('assets')}}/images/screenshots/dark.jpg" alt="light theme">
           </a>
         </div>
       </div>
@@ -371,23 +374,23 @@ License: You must have a valid license purchased only from above link or https:/
 	</div>
 
 	<!-- core:js -->
-	<script src="../assets/vendors/core/core.js"></script>
+	<script src="{{asset('assets')}}/vendors/core/core.js"></script>
 	<!-- endinject -->
   <!-- plugin js for this page -->
-  <script src="../assets/vendors/chartjs/Chart.min.js"></script>
-  <script src="../assets/vendors/jquery.flot/jquery.flot.js"></script>
-  <script src="../assets/vendors/jquery.flot/jquery.flot.resize.js"></script>
-  <script src="../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
-  <script src="../assets/vendors/progressbar.js/progressbar.min.js"></script>
+  <script src="{{asset('assets')}}/vendors/chartjs/Chart.min.js"></script>
+  <script src="{{asset('assets')}}/vendors/jquery.flot/jquery.flot.js"></script>
+  <script src="{{asset('assets')}}/vendors/jquery.flot/jquery.flot.resize.js"></script>
+  <script src="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="{{asset('assets')}}/vendors/apexcharts/apexcharts.min.js"></script>
+  <script src="{{asset('assets')}}/vendors/progressbar.js/progressbar.min.js"></script>
 	<!-- end plugin js for this page -->
 	<!-- inject:js -->
-	<script src="../assets/vendors/feather-icons/feather.min.js"></script>
-	<script src="../assets/js/template.js"></script>
+	<script src="{{asset('assets')}}/vendors/feather-icons/feather.min.js"></script>
+	<script src="{{asset('assets')}}/js/template.js"></script>
 	<!-- endinject -->
   <!-- custom js for this page -->
-  <script src="../assets/js/dashboard.js"></script>
-  <script src="../assets/js/datepicker.js"></script>
+  <script src="{{asset('assets')}}/js/dashboard.js"></script>
+  <script src="{{asset('assets')}}/js/datepicker.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- end custom js for this page -->
 	@yield('script')
