@@ -6,12 +6,24 @@
                       <div class="profile-header">
                           <div class="cover">
                               <div class="gray-shade"></div>
-                              <figure>
-                                  <img src="https://via.placeholder.com/1148x272" class="img-fluid" alt="profile cover">
+                              <figure height="250px">
+                                  <img 
+                                  @if (Auth::user()->cover_image != null)
+                                      src="{{asset('uploads')}}/cover_image/{{Auth::user()->cover_image}}"
+                                  @else
+                                  src="https://via.placeholder.com/1148x272"
+                                  @endif
+                                  height="250px" style="object-fit:cover;" alt="profile cover">
                               </figure>
                               <div class="cover-body d-flex justify-content-between align-items-center">
                                   <div>
-                                      <img class="profile-pic" src="https://via.placeholder.com/100x100" alt="profile">
+                                      <img class="profile-pic" 
+                                      @if (Auth::user()->cover_image != null)
+                                      src="{{asset('uploads')}}/profile_image/{{Auth::user()->profile_image}}"
+                                      @else
+                                      src="https://via.placeholder.com/100x100"
+                                      @endif
+                                       alt="profile">
                                       <span class="profile-name">Amiah Burton</span>
                                   </div>
                                   <div class="d-none d-md-block">
@@ -51,22 +63,29 @@
             <div class="card">
                 <div class="card-body">
                         <h6 class="card-title">User Information</h6>
-                        <form class="forms-sample" action="{{route('profile.update',['id'=> Auth::user()->id])}}" method="POST">
+                        <form class="forms-sample" enctype="multipart/form-data" action="{{route('profile.update',['id'=> Auth::user()->id])}}" method="POST">
                             @csrf
                             <div class="form-group row">
                                <div class="col-md-6">
                                 <label for="exampleInputUsername1">Name</label>
                                 <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" name="name" value="{{ Auth::user()->name }}" placeholder="name">
+                                @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Email"  value="{{ Auth::user()->email }}" readonly>
+                                
                                </div>
                             </div>
                             <div class="form-group row">
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Address</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" value="{{ Auth::user()->address }}" placeholder="address" name="address">
+                                @error('address')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Facebook Username</label>
@@ -75,6 +94,9 @@
                                     value="{{  explode('.com/', Auth::user()->facebook)[1] }}"
                                 @endif
                                 placeholder="Facebook username" name="facebook">
+                                @error('facebook')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                             </div>
                             <div class="form-group row">
@@ -85,6 +107,9 @@
                                     value="{{  explode('.com/', Auth::user()->instagram)[1] }}"
                                 @endif
                                 placeholder="instagram username" name="instagram">
+                                @error('instagram')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Twitter Username</label>
@@ -93,16 +118,25 @@
                                     value="{{  explode('.com/', Auth::user()->twitter)[1] }}"
                                 @endif
                                  placeholder="twitter username" name="twitter">
+                                 @error('twitter')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                             </div>
                             <div class="form-group row">
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Profile Image</label>
                                 <input type="file" class="form-control" id="exampleInputEmail1"  name="profile_image">
+                                @error('profile_image')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Cover Image</label>
                                 <input type="file" class="form-control" name="cover_image">
+                                @error('cover_image')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                             </div>
                             <div class="form-group">
@@ -110,6 +144,9 @@
                                 <textarea name="bio" class="form-control">
                                     {{Auth::user()->bio}}
                                 </textarea>
+                                @error('bio')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Update Info</button>
                         </form>

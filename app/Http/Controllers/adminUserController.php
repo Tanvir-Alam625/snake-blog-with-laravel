@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image;
 use App\Models\User;
 
 class adminUserController extends Controller
@@ -21,7 +23,18 @@ class adminUserController extends Controller
         return back()->withSuccess('User Deleted!');
     }
     public function update(Request $request, $id){
-        // return $request;
+        // input field validation 
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'facebook'=>'required',
+            'instagram'=>'required',
+            'twitter'=>'required',
+            'bio'=>'required',
+            'profile_image'=> 'mimes:jpg',
+            'cover_image'=> 'mimes:jpg',
+        ]);
+        // update info 
         User::find($id)->update([
             'name'=> $request->name,
             'address'=> $request->address,
@@ -30,6 +43,24 @@ class adminUserController extends Controller
             'instagram'=> 'https://www.instagram.com/' . $request->instagram,
             'twitter'=>  'https://twitter.com/' . $request->twitter,
         ]);
+        // update profile image 
+        if ($request->hasFile('profile_image')) {
+            $file_name = auth()->user()->id.'.'.$request->file('profile_image')->getClientOriginalExtension();
+            $img = Image::make($request->file('profile_image'));
+            $img->save(base_path('public/uploads/profile_image/'.$file_name));
+            User::find($id)->update([
+                'profile_image'=> $file_name,
+            ]);
+        }
+        // update cover image 
+        if ($request->hasFile('cover_image')) {
+            $file_name = auth()->user()->id.'.'.$request->file('cover_image')->getClientOriginalExtension();
+            $img = Image::make($request->file('cover_image'));
+            $img->save(base_path('public/uploads/cover_image/'.$file_name));
+            User::find($id)->update([
+                'cover_image'=> $file_name,
+            ]);
+        }
         return back()->withSuccess('Your Info Updated Successfully!');
     }
     public function store(Request $request){

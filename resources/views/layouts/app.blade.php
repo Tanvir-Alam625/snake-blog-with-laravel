@@ -64,9 +64,11 @@ License: You must have a valid license purchased only from above link or https:/
             </a>
             <div class="collapse" id="general-pages">
               <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="{{ route('user.create')}}" class="nav-link">Create User</a>
-                </li>
+				@if (Auth::user()->role === 'admin')
+				<li class="nav-item">
+					<a href="{{ route('user.create')}}" class="nav-link">Create User</a>
+				  </li>
+				@endif
                 <li class="nav-item">
                   <a href="{{ route('profile.info')}}" class="nav-link">Profile</a>
                 </li>
