@@ -1,20 +1,4 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
 
 
 <!DOCTYPE html>
@@ -66,7 +50,7 @@ License: You must have a valid license purchased only from above link or https:/
         <ul class="nav">
           <li class="nav-item nav-category">Main</li>
           <li class="nav-item">
-            <a href="dashboard-one.html" class="nav-link">
+            <a href="{{ url('/dashboard') }}" class="nav-link">
               <i class="link-icon" data-feather="box"></i>
               <span class="link-title">Dashboard</span>
             </a>
@@ -75,66 +59,18 @@ License: You must have a valid license purchased only from above link or https:/
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
               <i class="link-icon" data-feather="book"></i>
-              <span class="link-title">Special pages</span>
+              <span class="link-title">Pages</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapse" id="general-pages">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/general/blank-page.html" class="nav-link">Blank page</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/general/faq.html" class="nav-link">Faq</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/general/invoice.html" class="nav-link">Invoice</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/general/profile.html" class="nav-link">Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/general/pricing.html" class="nav-link">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/general/timeline.html" class="nav-link">Timeline</a>
+                  <a href="{{ route('user.create')}}" class="nav-link">Create User</a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#authPages" role="button" aria-expanded="false" aria-controls="authPages">
-              <i class="link-icon" data-feather="unlock"></i>
-              <span class="link-title">Authentication</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
-            </a>
-            <div class="collapse" id="authPages">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="pages/auth/login.html" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/auth/register.html" class="nav-link">Register</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#errorPages" role="button" aria-expanded="false" aria-controls="errorPages">
-              <i class="link-icon" data-feather="cloud-off"></i>
-              <span class="link-title">Error</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
-            </a>
-            <div class="collapse" id="errorPages">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="pages/error/404.html" class="nav-link">404</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/error/500.html" class="nav-link">500</a>
-                </li>
-              </ul>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </nav>
@@ -400,10 +336,18 @@ License: You must have a valid license purchased only from above link or https:/
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="javascript:;" class="nav-link">
+                                            <form action="{{ url('/logout') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="nav-link border-0 bg-transparent">
+                                                    <i data-feather="log-out"></i>
+                                                    <span>Log Out</span>
+                                                </button>
+                                            </form>
+											{{-- <a href="{{ url('/logout')}}" class="nav-link">
 												<i data-feather="log-out"></i>
 												<span>Log Out</span>
-											</a>
+											</a> --}}
+                                          
 										</li>
 									</ul>
 								</div>
@@ -444,7 +388,9 @@ License: You must have a valid license purchased only from above link or https:/
   <!-- custom js for this page -->
   <script src="../assets/js/dashboard.js"></script>
   <script src="../assets/js/datepicker.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- end custom js for this page -->
+	@yield('script')
 </body>
 </html>    
 
