@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 // use Intervention\Image\Facades\Image;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;                       
+
 
 class adminUserController extends Controller
+
 {
     //
     public function create(){
@@ -21,6 +24,25 @@ class adminUserController extends Controller
     public function destroy( $id){
         User::find($id)->delete();
         return back()->withSuccess('User Deleted!');
+    }
+    
+    public function passwordChange(Request $request, $id){
+        // password validation 
+        $request->validate([
+            '*'=>'required | min:6',
+            'new_password'=> ['different:current_password', 'same:confirm_password', Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()],
+            'confirm_password'=>'same:new_password',
+        ]);
+        // check with db password 
+        if (Hash::check($request->current_password, auth()->user()->password)) {
+            // change the user password 
+            User::find($id)->update([
+                'password'=>Hash::make($request->new_password),
+            ]);
+            return back()->withSuccess('Your Password Changed Successfully!');
+        }else{
+            return back()->with('error','Incorrect your current Password!');
+        }
     }
     public function update(Request $request, $id){
         // input field validation 

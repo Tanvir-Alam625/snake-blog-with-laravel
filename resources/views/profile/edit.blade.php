@@ -23,6 +23,9 @@
                                       @else
                                       src="https://via.placeholder.com/100x100"
                                       @endif
+                                      style="object-fit:cover;"
+                                      height='100'
+                                      width='100'
                                        alt="profile">
                                       <span class="profile-name">Amiah Burton</span>
                                   </div>
@@ -149,6 +152,31 @@
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Update Info</button>
+                        </form>
+                        <br><br><br><br>
+                        <form class="forms-sample"  action="{{route('password.change',['id'=> Auth::user()->id])}}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Current Password</label>
+                                <input type="password" class="form-control" id="exampleInputUsername1" autocomplete="off" name="current_password">
+                                @error('current_password')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <label for="exampleInputUsername1">New Password</label>
+                                <input type="password" class="form-control" id="exampleInputUsername1" autocomplete="off" name="new_password">
+                                @error('new_password')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <label for="exampleInputUsername1">Confirm Password</label>
+                                <input type="password" class="form-control" id="exampleInputUsername1" autocomplete="off" name="confirm_password">
+                                @error('confirm_password')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            @if (session('error'))
+                                <p class="text-danger">{{ session('error') }}</p><br>
+                            @endif
+                            <button type="submit" class="btn btn-primary mr-2">Change Password</button>
                         </form>
                 </div>
             </div>

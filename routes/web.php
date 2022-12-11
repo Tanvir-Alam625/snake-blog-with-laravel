@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/user_delete/{id}', [ adminUserController::class, 'destroy'])->name('user.destroy');
     Route::get('/admin/profile/info', [ adminUserController::class, 'info'])->name('profile.info');
     Route::post('/admin/profile/info/{id}', [ adminUserController::class, 'update'])->name('profile.update');
+    Route::post('/admin/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
 });
 
 require __DIR__.'/auth.php';
