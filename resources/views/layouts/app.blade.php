@@ -55,11 +55,12 @@ License: You must have a valid license purchased only from above link or https:/
               <span class="link-title">Dashboard</span>
             </a>
           </li>
+		  {{-- start the routes  --}}
           <li class="nav-item nav-category">Pages</li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
               <i class="link-icon" data-feather="book"></i>
-              <span class="link-title">Pages</span>
+              <span class="link-title">User Options</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapse" id="general-pages">
@@ -70,12 +71,32 @@ License: You must have a valid license purchased only from above link or https:/
 				  </li>
 				@endif
                 <li class="nav-item">
-                  <a href="{{ route('profile.info')}}" class="nav-link">Profile</a>
-                </li>
+					<a href="{{ route('profile.info')}}" class="nav-link">Profile</a>
+				  </li>
               </ul>
             </div>
           </li>
-          
+		  {{-- admin user routes  start --}}
+		  @if (Auth::user()->role === 'admin')
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="general-pages">
+              <i class="link-icon" data-feather="list"></i>
+              <span class="link-title">Category</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="category">
+              <ul class="nav sub-menu">
+				<li class="nav-item">
+					<a href="{{ route('categories.create')}}" class="nav-link">Create a new Category</a>
+				  </li>
+				<li class="nav-item">
+					<a href="{{ route('categories.index')}}" class="nav-link">All Categories</a>
+				  </li>
+				</ul>
+            </div>
+		</li>
+		@endif
+          {{-- admin user routes  end --}}
         </ul>
       </div>
     </nav>

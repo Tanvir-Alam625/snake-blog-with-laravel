@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\adminUserController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,17 +27,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth')->prefix('admin')->group(function () {
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // user create routes 
-    Route::get('/admin/user', [ adminUserController::class, 'create'])->name('user.create');
-    Route::post('/admin/user', [ adminUserController::class, 'store'])->name('user.create');
-    Route::get('/admin/user_delete/{id}', [ adminUserController::class, 'destroy'])->name('user.destroy');
-    Route::get('/admin/profile/info', [ adminUserController::class, 'info'])->name('profile.info');
-    Route::post('/admin/profile/info/{id}', [ adminUserController::class, 'update'])->name('profile.update');
-    Route::post('/admin/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
+    Route::get('/user', [ adminUserController::class, 'create'])->name('user.create')->middleware('RoleManagement');
+    Route::post('/user', [ adminUserController::class, 'store'])->name('user.create')->middleware('RoleManagement');
+    Route::get('/user_delete/{id}', [ adminUserController::class, 'destroy'])->name('user.destroy')->middleware('RoleManagement');
+    Route::get('/profile/info', [ adminUserController::class, 'info'])->name('profile.info');
+    Route::post('/profile/info/{id}', [ adminUserController::class, 'update'])->name('profile.update');
+    Route::post('/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
+    Route::resource('categories',CategoryController::class);
 });
 
 require __DIR__.'/auth.php';

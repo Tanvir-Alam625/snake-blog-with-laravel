@@ -27,7 +27,7 @@
                                       height='100'
                                       width='100'
                                        alt="profile">
-                                      <span class="profile-name">Amiah Burton</span>
+                                      <span class="profile-name">{{ Auth::user()->name }}</span>
                                   </div>
                                   <div class="d-none d-md-block">
                                       <button class="btn btn-primary btn-icon-text btn-edit-profile">
