@@ -38,7 +38,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/profile/info', [ adminUserController::class, 'info'])->name('profile.info');
     Route::post('/profile/info/{id}', [ adminUserController::class, 'update'])->name('profile.update');
     Route::post('/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
-    Route::resource('categories',CategoryController::class);
+    // categories Routes
+    Route::resource('categories',CategoryController::class)->middleware('RoleManagement');
+    Route::get('categories/{id}', [CategoryController::class, 'trashDelete']);
 });
 
 require __DIR__.'/auth.php';

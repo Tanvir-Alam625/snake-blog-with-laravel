@@ -52,7 +52,7 @@
                                </div>
                             </div>
                             <br><br>
-                            <button type="submit" class="btn btn-primary mr-2">Update Info</button>
+                            <button type="submit" class="btn btn-primary mr-2">Create Category</button>
                         </form>
                 </div>
             </div>
