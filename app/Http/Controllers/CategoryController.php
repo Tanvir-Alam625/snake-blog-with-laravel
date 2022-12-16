@@ -20,6 +20,7 @@ class CategoryController extends Controller
         $categoriesCount = count(Category::all());
         return view('categories.index',[
             'categories'=>Category::latest()->get(),
+            'trashCategories'=>Category::onlyTrashed()->latest()->get(),
             'subCategories'=>SubCategory::latest()->paginate($categoriesCount)->withQueryString(),
         ]);
     }
@@ -135,14 +136,20 @@ class CategoryController extends Controller
         return back();
     }
     
-    public function trashDelete(Request $id)
-    {
-        return $id;
-        // $id = $category->id;
-        // $subCategory = SubCategory::where('parent_id',$id)->delete();
-        // return back();
-        // echo $subCategory;
-        // return $subCategory;
+    // frocedelete Category 
+    public function delete($id)
+    {   $category_image = Category::onlyTrashed()->where('id',$id)->get()[0]->image;
+       
+        $subCategories = SubCategory::onlyTrashed()->where('parent_id',$id)->get();
+        foreach ($subCategories as $subcategory) {
+            $image_name  = $subcategory->image;
+            $subcategory->forceDelete();
+            unlink(base_path('public/uploads/category_image/subcategory_image/'.$image_name));
+         }
+         Category::onlyTrashed()->find($id)->forceDelete();
+         unlink(base_path('public/uploads/category_image/'.$category_image));
+        return back()->withSuccess('Categories Successfully Deleted!');
+        
     }
 
 }

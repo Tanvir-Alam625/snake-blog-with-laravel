@@ -40,7 +40,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
     // categories Routes
     Route::resource('categories',CategoryController::class)->middleware('RoleManagement');
-    Route::get('categories/{id}', [CategoryController::class, 'trashDelete']);
+    Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->middleware('RoleManagement')->name('category.force');
 });
 
 require __DIR__.'/auth.php';
