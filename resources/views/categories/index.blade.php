@@ -162,6 +162,7 @@
                                 <tr>
                                     <th>Serial</th>
                                     <th>Name</th>
+                                    <th>Parent Category</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -171,6 +172,7 @@
                                 <tr>
                                     <th>{{$subCategories->firstItem() + $loop->index}}</th>
                                     <td>{{ $subCategory->name }}</td>
+                                    <td>{{ $subCategory->RelationWithCategory->name }}</td>
                                     <td>
                                         @if ($subCategory->status === 'active')
                                             <span class="badge badge-success badge-sm">Active</span>

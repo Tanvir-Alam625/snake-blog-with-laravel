@@ -10,4 +10,8 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+    public function RelationWithSubCategory()
+    {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
 }

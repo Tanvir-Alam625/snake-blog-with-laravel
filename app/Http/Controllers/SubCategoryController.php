@@ -119,8 +119,9 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        $subCategory->delete();
-        return back()->withSuccess('Sub Category deleted.');
+        // $subCategory->delete();
+        // return back()->withSuccess('Sub Category deleted.');
+        return $subCategory->RelationWithCategory;
     }
     public function delete($id)
     {
