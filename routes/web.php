@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\adminUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,11 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // categories Routes
     Route::resource('categories',CategoryController::class)->middleware('RoleManagement');
     Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->middleware('RoleManagement')->name('category.force');
+    Route::get('/categories/restore/{id}', [CategoryController::class, 'restore'])->middleware('RoleManagement')->name('category.restore');
+    // subcategory rotues 
+    Route::resource('subCategories',SubCategoryController::class)->middleware('RoleManagement');
+    Route::get('/subCategories/delete/{id}', [SubCategoryController::class, 'delete'])->middleware('RoleManagement')->name('subCategories.delete');
+    Route::get('/subCategories/restore/{id}', [SubCategoryController::class, 'restore'])->middleware('RoleManagement')->name('subCategories.restore');
 });
 
 require __DIR__.'/auth.php';

@@ -21,6 +21,7 @@ class CategoryController extends Controller
         return view('categories.index',[
             'categories'=>Category::latest()->get(),
             'trashCategories'=>Category::onlyTrashed()->latest()->get(),
+            'subtrashCategories'=>SubCategory::onlyTrashed()->latest()->get(),
             'subCategories'=>SubCategory::latest()->paginate($categoriesCount)->withQueryString(),
         ]);
     }
@@ -42,11 +43,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {   
-        // validation 
-        $request->validate([
-            'name'=> 'required',
-            'image'=> 'required | mimes:jpg,png'
-        ]);
         // create the slug text 
         $convert_slug= '';
         if($request->slug){
@@ -56,6 +52,12 @@ class CategoryController extends Controller
         }
         //  conditional insert data into database 
         if($request->parent_id > 0){
+            // validation 
+            $request->validate([
+                'name'=> 'required | unique:sub_categories,name',
+                'slug'=> 'unique:sub_categories,slug',
+                'image'=> 'required | mimes:jpg,png'
+            ]);
             // subcategory 
             $file_name = auth()->user()->id. '_' .time().'.'.$request->file('image')->getClientOriginalExtension();
                 $img = Image::make($request->file('image'));
@@ -70,6 +72,12 @@ class CategoryController extends Controller
                 ]);
             return back()->withSuccess('SubCategory Created Successfully');
         }else{
+            // validation 
+            $request->validate([
+                'name'=> 'required | unique:categories,name',
+                'slug'=> 'unique:categories,slug',
+                'image'=> 'required | mimes:jpg,png'
+            ]);
             // category 
                 $file_name = auth()->user()->id. '_' .time().'.'.$request->file('image')->getClientOriginalExtension();
                 $img = Image::make($request->file('image'));
@@ -104,7 +112,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return $category;
+        return view('categories.edit',[
+            'category'=>$category,
+        ]);
     }
 
     /**
@@ -116,7 +126,42 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // validation 
+        $request->validate([
+            'name'=> 'required | unique:categories,name,'.$category->id,
+            'slug'=> 'required | unique:categories,slug,'.$category->id ,
+            'image'=> 'mimes:jpg,png'
+        ]);
+         // create the slug text 
+
+         $convert_slug= '';
+         if($request->slug){
+             $convert_slug = Str::snake($request->slug,'-');
+         }else{
+             $convert_slug = Str::snake($request->name,'-');
+         }
+        if($request->image){
+            // category  image update 
+                $old_image = $category->image;
+                unlink(base_path('public/uploads/category_image/'.$old_image));
+                $file_name = auth()->user()->id. '_' .time().'.'.$request->file('image')->getClientOriginalExtension();
+                $img = Image::make($request->file('image'));
+                $img->save(base_path('public/uploads/category_image/'.$file_name));
+                $category->update([
+                    'name'=>$request->name,
+                    'image'=> $file_name,
+                    'status'=>$request->status,
+                    'slug'=> $convert_slug,
+                ]);
+            return back()->withSuccess('Category Created Successfully');
+        }else{
+            Category::where('id',$category->id)->update([
+                'name'=>$request->name,
+                'status'=>$request->status,
+                'slug'=> $convert_slug,
+            ]);
+            return back()->withSuccess('Category Created Successfully!');
+        }
     }
 
     /**
@@ -150,6 +195,12 @@ class CategoryController extends Controller
          unlink(base_path('public/uploads/category_image/'.$category_image));
         return back()->withSuccess('Categories Successfully Deleted!');
         
+    }
+    // restore Category 
+    public function restore($id)
+    {   
+        $category_image = Category::onlyTrashed()->where('id',$id)->restore();
+        return back()->withSuccess('Category Restore Successfully!');
     }
 
 }

@@ -20,7 +20,9 @@
                                <div class="col-md-6">
                                 <label for="exampleInputEmail1">Category Slug</label>
                                 <input type="text" class="form-control" name="slug"  placeholder="slug" >
-                                
+                                @error('slug')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                </div>
                             </div>
                             <div class="form-group row">

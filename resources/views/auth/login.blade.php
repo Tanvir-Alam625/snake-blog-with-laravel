@@ -44,11 +44,11 @@
                           </a>
                       @endif
                       <div class="block mt-4">
-                        <label for="remember_me" class="inline-flex items-center">
-                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                        </label>
-                    </div>
+                          <label for="remember_me" class="inline-flex items-center">
+                              <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                              <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                          </label>
+                      </div>
                       <div class="mt-3">
                         <button class="btn btn-primary mr-2 mb-2 mb-md-0 text-white" type="submit">Login</button>
                         <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
