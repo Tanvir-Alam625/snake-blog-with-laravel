@@ -30,6 +30,7 @@ License: You must have a valid license purchased only from above link or https:/
 	<link rel="stylesheet" href="{{asset('assets')}}/css/demo_1/style.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png" />
+  
 </head>
 <body>
 	<div class="main-wrapper">
@@ -94,6 +95,12 @@ License: You must have a valid license purchased only from above link or https:/
 				  </li>
 				</ul>
             </div>
+		</li>
+		<li class="nav-item nav-category">
+			<a href="{{route('tag.index')}}" class="nav-link">
+				<i class="link-icon" data-feather="tag"></i>
+				<span class="link-title">Tags</span>
+			  </a>
 		</li>
 		@endif
           {{-- admin user routes  end --}}
@@ -369,11 +376,6 @@ License: You must have a valid license purchased only from above link or https:/
                                                     <span>Log Out</span>
                                                 </button>
                                             </form>
-											{{-- <a href="{{ url('/logout')}}" class="nav-link">
-												<i data-feather="log-out"></i>
-												<span>Log Out</span>
-											</a> --}}
-                                          
 										</li>
 									</ul>
 								</div>

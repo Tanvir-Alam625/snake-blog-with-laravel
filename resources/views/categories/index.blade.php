@@ -10,7 +10,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h6 class="card-title">Categories</h6>
                             {{-- Categories trash modal button  --}}
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Trash
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Trash
                                 <span class="badge badge-light">{{count($trashCategories)}}</span>
                             </button>
                             <!-- start  Categories Trash Modal -->
@@ -109,7 +109,7 @@
                      <div class="d-flex justify-content-between justify-item-center mb-4">
                         <h6 class="card-title">Sub Categories</h6>
                         {{-- Categories trash modal button  --}}
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">Trash
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Trash
                             <span class="badge badge-light">{{count($subtrashCategories)}}</span>
                         </button>
                         <!-- start  subCategories Trash Modal -->
