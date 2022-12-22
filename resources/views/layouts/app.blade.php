@@ -29,7 +29,10 @@ License: You must have a valid license purchased only from above link or https:/
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="{{asset('assets')}}/css/demo_1/style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png" />
+  <!-- Summernote CSS - CDN Link -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
   
 </head>
 <body>
@@ -96,11 +99,28 @@ License: You must have a valid license purchased only from above link or https:/
 				</ul>
             </div>
 		</li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#post" role="button" aria-expanded="false" aria-controls="general-pages">
+              <i class="link-icon" data-feather="list"></i>
+              <span class="link-title">Post</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="post">
+              <ul class="nav sub-menu">
+				<li class="nav-item">
+					<a href="{{ route('post.create')}}" class="nav-link">Create a new Post</a>
+				  </li>
+				<li class="nav-item">
+					<a href="{{ route('post.index')}}" class="nav-link">All Posts</a>
+				  </li>
+				</ul>
+            </div>
+		</li>
 		<li class="nav-item nav-category">
 			<a href="{{route('tag.index')}}" class="nav-link">
 				<i class="link-icon" data-feather="tag"></i>
 				<span class="link-title">Tags</span>
-			  </a>
+			</a>
 		</li>
 		@endif
           {{-- admin user routes  end --}}
@@ -418,6 +438,9 @@ License: You must have a valid license purchased only from above link or https:/
   <script src="{{asset('assets')}}/js/datepicker.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- end custom js for this page -->
+	
+    <!-- Summernote JS - CDN Link -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	@yield('script')
 </body>
 </html>    

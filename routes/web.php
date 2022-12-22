@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\adminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/subCategories/delete/{id}', [SubCategoryController::class, 'delete'])->middleware('RoleManagement')->name('subCategories.delete');
     Route::get('/subCategories/restore/{id}', [SubCategoryController::class, 'restore'])->middleware('RoleManagement')->name('subCategories.restore');
     Route::resource('tag',TagController::class)->middleware('RoleManagement');
+    Route::resource('post',PostController::class)->middleware('RoleManagement');
 });
 
 require __DIR__.'/auth.php';
