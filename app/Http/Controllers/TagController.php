@@ -39,11 +39,11 @@ class TagController extends Controller
             'tag_name'=>'required',
         ]);
         Tag::insert([
-            'tag_name'=>$request->tag_name,
+            'tag_name' => $request->tag_name,
+            'created_at' => now()
         ]);
         return back()->withSuccess("Tag Added Successfully");
     }
-
     /**
      * Display the specified resource.
      *

@@ -15,6 +15,7 @@ License: You must have a valid license purchased only from above link or https:/
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
 	<!-- core:css -->
 	<link rel="stylesheet" href="{{asset('assets')}}/vendors/core/core.css">
@@ -32,8 +33,9 @@ License: You must have a valid license purchased only from above link or https:/
   <!-- Summernote CSS - CDN Link -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   {{-- select2 CDN CSS-link  --}}
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-  
 </head>
 <body>
 	<div class="main-wrapper">
@@ -438,7 +440,8 @@ License: You must have a valid license purchased only from above link or https:/
   <script src="{{asset('assets')}}/js/datepicker.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- end custom js for this page -->
-	
+	{{-- select2 CDN Jquery-Link  --}}
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Summernote JS - CDN Link -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	@yield('script')

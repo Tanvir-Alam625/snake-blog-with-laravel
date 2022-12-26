@@ -51,6 +51,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/subCategories/restore/{id}', [SubCategoryController::class, 'restore'])->middleware('RoleManagement')->name('subCategories.restore');
     Route::resource('tag',TagController::class)->middleware('RoleManagement');
     Route::resource('post',PostController::class)->middleware('RoleManagement');
+    Route::post('/post/subcategorylist',[PostController::class, 'getSubcategory'])->middleware('RoleManagement');
+
 });
 
 require __DIR__.'/auth.php';

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory,SoftDeletes;
+    public function RelationWithTag()
+    {
+        return $this->belongsToMany(Tag::class,'table_post_tags', 'post_id', 'tag_id')->withTimestamps();
+    }
 }
