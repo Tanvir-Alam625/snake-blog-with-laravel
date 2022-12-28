@@ -63,6 +63,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // for many relationship 
     Route::post('/post/subcategorylist',[PostController::class, 'getSubcategory'])->middleware('RoleManagement');
     Route::get('/post/restore/{id}', [PostController::class, 'restore'])->middleware('RoleManagement')->name('post.restore');
+    Route::get('/post/delete/{id}', [PostController::class, 'delete'])->middleware('RoleManagement')->name('post.delete');
 
 });
 

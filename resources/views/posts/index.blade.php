@@ -40,7 +40,7 @@
                                         <th>{{$loop->iteration}}</th>
                                         <td>{{ $trashPost->post_title}}</td>
                                         <td>
-                                        {{-- <a href=" {{ route('post.delete',['id'=>$trashPost->id])}}" class="btn btn-danger">Delete</a> --}}
+                                        <a href=" {{ route('post.delete',['id'=>$trashPost->id])}}" class="btn btn-danger">Delete</a>
                                         <a href=" {{ route('post.restore',['id'=>$trashPost->id])}}" class="btn btn-success">Restore</a>
                                         </form>   
                                         </td>

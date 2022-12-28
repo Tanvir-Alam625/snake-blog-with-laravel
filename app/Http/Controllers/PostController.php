@@ -193,10 +193,45 @@ class PostController extends Controller
         $post->delete();
         return back();
     }
-    // post restore method 
+    /**
+     * trashed items restore
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
     public function restore($id)
     {
         Post::onlyTrashed()->find($id)->restore();
         return back();
+    }
+    /**
+     * force delete items
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $post_data= Post::onlyTrashed()->find($id);
+        unlink(base_path('public/uploads/post_thumbnail/' . $post_data->post_thumbnail));
+        $post_description = $post_data->post_description;
+        libxml_use_internal_errors(true);
+        $dom = new \DomDocument();
+        $dom->loadHtml('<?xml encoding="utf-8" ?>' . $post_description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    // must include this to avoid font problem
+        $images = $dom->getElementsByTagName('img');
+        if (count($images) > 0) {
+            foreach ($images as  $img) {
+                $src = $img->getAttribute('src');
+                $filename = last(explode("/", $src));
+                unlink(base_path('public/uploads/post_description/' . $filename));
+                # if the img source is 'data-url'
+                if (preg_match('/data:image/', $src)) {
+                    unlink(base_path('public/uploads/post_description/' . $filename));
+                }
+            }
+        }
+        $post_data->RelationWithTag()->detach();
+        $post_data->forceDelete();
+        return back()->withSuccess(' Trash Post deleted');
     }
 }
