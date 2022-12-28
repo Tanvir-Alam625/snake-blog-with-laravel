@@ -110,7 +110,7 @@
                         <h6 class="card-title">Sub Categories</h6>
                         {{-- Categories trash modal button  --}}
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Trash
-                            <span class="badge badge-light">{{count($subtrashCategories)}}</span>
+                            <sup class="badge badge-light">{{count($subtrashCategories)}}</sup>
                         </button>
                         <!-- start  subCategories Trash Modal -->
                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,7 +180,6 @@
                                             <span class="badge badge-warning badge-sm">Inactive</span>
                                         @endif
                                     </td>
-                                    <td>{{ $subCategory->slug }}</td>
                                     <td>
                                         <a href=" {{ route('subCategories.edit',['subCategory'=>$subCategory->id])}}" class="btn btn-warning">Edit</a>
                                         <form class="d-inline" action="{{route('subCategories.destroy', ['subCategory'=>$subCategory->id])}}" method="post">
@@ -188,7 +187,6 @@
                                             @method('DELETE')
                                             <button class="btn btn-danger">Delete</button>
                                         </form>
-                                        {{-- <a href="{{route('subCategories.destroy', ['subCategory'=>$subCategory->id])}}" >Delete</a> --}}
                                     </td>
                                 </tr>
                                 @empty

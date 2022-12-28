@@ -1,50 +1,71 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
+    
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                    <h6 class="card-title">Create Admin and Writer</h6>
-                    <form class="forms-sample" action="{{ route('user.create') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Name">
-                            @error('name')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
-                            @error('email')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password"  placeholder="Password">
-                            @error('password')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Role</label>
-                            <select name="role" id="exampleInputPassword1" class="form-control">
-                                <option value="admin">Admin</option>
-                                <option value="writer" selected >Writer</option>
-                            </select>
-
-                        </div>
-                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    </form>
+            <div class="d-flex justify-content-between mb-3">
+                <h6 class="card-title">Admin & Writer List</h6>
+                {{-- modal btn  --}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">
+                    Create Admin & Writer
+                </button>
             </div>
-          </div>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-            <h6 class="card-title">Admin & Writer List</h6>
+             {{-- ==================== --}}
+            {{-- modal container  --}}
+            {{-- ==================== --}}
+            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="card-title">Create Admin & Writer</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <form class="forms-sample" action="{{ route('user.create') }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Name</label>
+                                            <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Name">
+                                            @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
+                                            @error('email')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" name="password"  placeholder="Password">
+                                            @error('password')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Role</label>
+                                            <select name="role" id="exampleInputPassword1" class="form-control">
+                                                <option value="admin">Admin</option>
+                                                <option value="writer" selected >Writer</option>
+                                            </select>
+                
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>

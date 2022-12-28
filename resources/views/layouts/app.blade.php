@@ -61,8 +61,13 @@ License: You must have a valid license purchased only from above link or https:/
               <span class="link-title">Dashboard</span>
             </a>
           </li>
+		  {{-- ======================== --}}
 		  {{-- start the routes  --}}
+		  {{-- ======================== --}}
           <li class="nav-item nav-category">Pages</li>
+		  {{-- ======================== --}}
+		  {{-- start the user route  --}}
+		  {{-- ======================== --}}
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
               <i class="link-icon" data-feather="book"></i>
@@ -82,10 +87,13 @@ License: You must have a valid license purchased only from above link or https:/
               </ul>
             </div>
           </li>
+		   {{-- ======================== --}}
+		  {{-- end the user route  --}}
 		  {{-- admin user routes  start --}}
+		  {{-- ======================== --}}
 		  @if (Auth::user()->role === 'admin')
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="category">
               <i class="link-icon" data-feather="list"></i>
               <span class="link-title">Category</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
@@ -102,7 +110,7 @@ License: You must have a valid license purchased only from above link or https:/
             </div>
 		</li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#post" role="button" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#post" role="button" aria-expanded="false" aria-controls="post">
               <i class="link-icon" data-feather="list"></i>
               <span class="link-title">Post</span>
               <i class="link-arrow" data-feather="chevron-down"></i>

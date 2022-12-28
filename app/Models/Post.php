@@ -12,4 +12,8 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class,'table_post_tags', 'post_id', 'tag_id')->withTimestamps();
     }
+    public function RelationWithCategory()
+    {
+        return $this->belongsTo(Category::class ,'post_category', 'id');
+    }
 }

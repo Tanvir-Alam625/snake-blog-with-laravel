@@ -20,7 +20,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        
+        return view('posts.index',[
+            'posts'=> Post::paginate(7)->withQueryString(),
+            'trashPosts'=> Post::onlyTrashed()->get(),
+        ]);
     }
 
     /**
@@ -152,7 +156,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post;
     }
 
     /**
@@ -186,6 +190,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return back();
+    }
+    // post restore method 
+    public function restore($id)
+    {
+        Post::onlyTrashed()->find($id)->restore();
+        return back();
     }
 }

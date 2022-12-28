@@ -31,27 +31,38 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->prefix('admin')->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // ======================
     // user create routes 
+    // ======================
     Route::get('/user', [ adminUserController::class, 'create'])->name('user.create')->middleware('RoleManagement');
     Route::post('/user', [ adminUserController::class, 'store'])->name('user.create')->middleware('RoleManagement');
     Route::get('/user_delete/{id}', [ adminUserController::class, 'destroy'])->name('user.destroy')->middleware('RoleManagement');
     Route::get('/profile/info', [ adminUserController::class, 'info'])->name('profile.info');
     Route::post('/profile/info/{id}', [ adminUserController::class, 'update'])->name('profile.update');
     Route::post('/profile/password/{id}', [ adminUserController::class, 'passwordChange'])->name('password.change');
+    // ====================
     // categories Routes
+    // ====================
     Route::resource('categories',CategoryController::class)->middleware('RoleManagement');
     Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->middleware('RoleManagement')->name('category.force');
     Route::get('/categories/restore/{id}', [CategoryController::class, 'restore'])->middleware('RoleManagement')->name('category.restore');
+    // =====================
     // subcategory rotues 
+    // =====================
     Route::resource('subCategories',SubCategoryController::class)->middleware('RoleManagement');
     Route::get('/subCategories/delete/{id}', [SubCategoryController::class, 'delete'])->middleware('RoleManagement')->name('subCategories.delete');
     Route::get('/subCategories/restore/{id}', [SubCategoryController::class, 'restore'])->middleware('RoleManagement')->name('subCategories.restore');
+    //=============
+    // tags route 
+    // ============
     Route::resource('tag',TagController::class)->middleware('RoleManagement');
+    // ================
+    // post route 
+    // ================
     Route::resource('post',PostController::class)->middleware('RoleManagement');
+    // for many relationship 
     Route::post('/post/subcategorylist',[PostController::class, 'getSubcategory'])->middleware('RoleManagement');
+    Route::get('/post/restore/{id}', [PostController::class, 'restore'])->middleware('RoleManagement')->name('post.restore');
 
 });
 

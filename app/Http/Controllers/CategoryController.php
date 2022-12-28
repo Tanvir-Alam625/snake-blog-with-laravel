@@ -22,7 +22,7 @@ class CategoryController extends Controller
             'categories'=>Category::latest()->get(),
             'trashCategories'=>Category::onlyTrashed()->latest()->get(),
             'subtrashCategories'=>SubCategory::onlyTrashed()->latest()->get(),
-            'subCategories'=>SubCategory::latest()->paginate($categoriesCount)->withQueryString(),
+            'subCategories'=>SubCategory::paginate(7)->withQueryString(),
         ]);
     }
     /**
